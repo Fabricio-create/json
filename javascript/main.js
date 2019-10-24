@@ -1,4 +1,4 @@
-let urlAPI = 'https://gilsonpolito-api.herokuapp.com/alunos';
+let urlAPI = 'https://gilsonpolito-api.herokuapp.com/alunos/';
 
 $(document).ready(function(){
 
@@ -6,18 +6,18 @@ $(document).ready(function(){
        type: 'GET',
        contentType: 'application/json',
        url: urlAPI,
-       dataType: 'json' ,
+       dataType: 'json',
        success: function(data, textStatus, jqXHR){
-                $.each(data, function(index, itemData){
-                    insereLinha(itemData.id, itemData.nome, itemData.site);
+            $.each(data, function(index, itemData){
+                insereLinha(itemData.id, itemData.nome, itemData.site);
 
-                });
-       } ,
+            });
+        },
        error: function(jqXHR, textStatus, errorThrown){
        alert('Status: ' + textStatus +
             'n/Tipo:'  + errorThrown + 
             '/nMensagem: ' + jqXHR. responseText);     
-      }
+        }
     });
 });
     
@@ -43,28 +43,82 @@ function insereLinha(id, nome, site){
 
 }
 
-/*$('#add-to-list').on('click', (evento) =>{
-      evento.preventDefault();
+$('#add-to-list').on('click', (evento) =>{
+    evento.preventDefault();
      
-      $ajax({
-          type: 'post'
-          contentType: 'application/json',
-          url : urlAPI,
-          dataType: 'json',
-          data: formTOJSON(),
-          success: function(data, textStatus, jqXHR){
-            $.each(data, function(index, iTemData){
+    $ajax({
+            type: 'post'
+            contentType: 'application/json',
+            url : urlAPI,
+            dataType: 'json',
+            data: formTOJSON(),
+            success: function(data, textStatus, jqXHR){
+             $.each(data, function(index, iTemData){
                 insereLinha(itemData.id, itemData.nome, itemData.site);
+               
+                handler();
 
-
-            })
+            },
             error: function(jqXHR, textStatus, errorThrown){
-            alert('Status: ' + textStatus, errorThrown 'n/Tipo:' 
-            + errorThrown + '/nMensagem: ' + jqXHR. responseText);
-        },
-  
+               alert('Status: ' + textStatus, errorThrown 'n/Tipo:' 
+               + errorThrown + '/nMensagem: ' + jqXHR. responseText);
+            }
+             
     })
 })
+
+function handler(){
+
+    $(' .action_delete').each(function){
+        $(this).click(function(evento)){
+            evento.stopImmediatePropagation();
+            evento.preventDefault();
+            let tr = $(this).parent().parent()
+            if(confirm('Deseja remover o aluno?')){
+            $ajax({
+                 type: 'DELETE'
+                 contentType: 'application/json'
+                 url:urlAPI + $(this).attr('value'),
+
+                    sucess: function(){
+                        tr.remove();
+                    },
+
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert('Status: ' textStatus +
+                        '\nTipo:' + errorThrown +
+                        '\nMensagem:' + jqXHR, responseText);
+                    }
+            });
+        });
+    });
+
+    $('action_edit').each(function(){
+        $(this).click(function(evento){
+        evento.preventDefault();
+        $ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: urlAPI + $(this).attr('value'),
+
+            sucess: (data){
+              $('#idHidden').val(data.id);            
+              $('#nomeId').val(data.nome); 
+              $('#emailId').val(data.site);
+            }
+            
+            error: function(jqXHR, textStatus, errorThrown){
+               alert('Status: ' textStatus +
+            '\nTipo:' + errorThrown +
+            '\nMensagem:' + jqXHR, responseText);
+
+            }
+        
+        });
+      
+    });
+
+}
 
 function formTOJSON(){
     return JSON.stringify({
@@ -75,4 +129,3 @@ function formTOJSON(){
     });
 
 }    
-*/
