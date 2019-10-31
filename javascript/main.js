@@ -40,7 +40,41 @@ function insereLinha(id, nome, site){
                   '</tr>';
 
     $('#alunoTable').append(linha);
+}
 
+$('update-to-list').on('click', (evento) =>{
+    evento.preventDefault();
+    $ajax({
+        type: 'PUT',
+        contentType: 'application/json',
+        url: urlAPI,
+        dataType: 'json'
+        data: formToJSON(),
+        sucess: function(){
+            $('AlunoTable tr').each(function(){
+                if($(this).find('.action_edit').attr('value') ==
+                $('#idHidden').val()){
+                    $(this).find('#nameIdTb').html($('#nimeId').val());
+                    $(this).find('#siteIdTb').html($('emailId').val());
+
+                    $('#formAluno').get(0).reset();
+                    $('#add-to-list').removeClass('d-none');
+                    $('#update-to-list').addClass('d-none');
+                    
+                }
+                                       
+               
+            })
+            
+        },
+
+        error: function(jqXHR, textStatus, errorThrown){
+            alert('Status: ' + textStatus +
+                 'n/Tipo:'  + errorThrown + 
+                 '/nMensagem: ' + jqXHR. responseText);     
+            }
+
+    })
 }
 
 $('#add-to-list').on('click', (evento) =>{
