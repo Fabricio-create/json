@@ -83,24 +83,28 @@ $('#update-to-list').on('click', (evento) =>{
 
 $('#add-to-list').on('click', (evento) =>{
     evento.preventDefault();
+    var validator = $("#formAluno").data("bs.validator");
+    validator.validate();
+    if(!validator.isIncomplete()){
     
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: urlAPI,
-        dataType: 'json',
-        data: formToJSON(),
-        success: function(data){
-            insereLinha(data.id, data.nome, data.site, data.endereco, data.telefone, data.nota);
-            handler();
-            $('#formAluno').get(0).reset();
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            alert('Status: ' + textStatus + 
-                  '\nTipo:' + errorThrown + 
-                  '\nMensagem: ' + jqXHR.responseText);
-        }
-    })
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: urlAPI,
+            dataType: 'json',
+             data: formToJSON(),
+            success: function(data){
+                 insereLinha(data.id, data.nome, data.site, data.endereco, data.telefone, data.nota);
+                 handler();
+                $('#formAluno').get(0).reset();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert('Status: ' + textStatus + 
+                     '\nTipo:' + errorThrown + 
+                      '\nMensagem: ' + jqXHR.responseText);
+             }
+       });
+    }
 });
 
 function handler(){

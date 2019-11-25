@@ -14,32 +14,37 @@
     <body>
           <div class="container">
               <h1>Lista de alunos</h1>
-              <form id="formAluno">
+              <form id="formAluno" data-toggle="validator" role="form">
                   <input type="hidden" id="idHidden" value=""/>
                   <div class="form-group">
                        <label for="nomeId" class="control-label">Nome</label>
                        <input id="nomeId" placeholder="Digite o nome"
-                       class="form-control" type="text" required/>
-                  </div>
-                  <div class="form-group">
+                         class="form-control" type="text" required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                  <div class="form-group" data-toggle="validator" role="form">
                        <label for="siteId" class="control-label">Site</label>
                        <input  id="siteId" placeholder="Digite o site" 
-                       class="form-control" type="site" required/>
+                         class="form-control" type="site" required/>
+                       <div class="help-block with-errors"></div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" data-toggle="validator" role="form">
                         <label for="enderecoId" class="control-label">endereco</label>
                         <input  id="enderecoId" placeholder="Digite o endereco" 
                         class="form-control" type="endereco" required/>
+                        <div class="help-block with-errors"></div>
                   </div>
-                        <div class="form-group">
+                        <div class="form-group" data-toggle="validator" role="form">
                         <label for="telefoneId" class="control-label">telefone</label>
                         <input  id="telefoneId" placeholder="Digite o telefone" 
                         class="form-control" type="telefone" required/>
+                        <div class="help-block with-errors"></div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" data-toggle="validator" role="form">
                         <label for="notaId" class="control-label">nota</label>
                         <input  id="notaId" placeholder="Digite a nota" 
                         class="form-control" type="nota" required/>
+                        <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                        <button id="add-to-list" type="submit" class="btn btn-primary">Adicionar a Lista</button>
@@ -66,5 +71,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="javascript/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     </body>
 </html>
